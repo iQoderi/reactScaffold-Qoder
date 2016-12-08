@@ -7,8 +7,10 @@
     "clean": "rimraf dist/*",
     "start": "better-npm-run dev",
     "copy": "cp -f ./src/index.html  ./src/favicon.ico ./dist/",
-    "dist:client": "better-npm-run dist",
-    "prod:client": "npm run clean&&npm run copy&&npm run dist:client"
+    "dist:client": "better-npm-run dist:client",
+    "prod:client": "npm run clean&&npm run copy&&npm run dist:client",
+    "prod:server": "better-npm-tun dist:server",
+    "prod": "better-npm-run dist"
   },
   "betterScripts": {
     "dev": {
@@ -17,8 +19,26 @@
         "NODE_ENV": "development"
       }
     },
-    "dist": {
+    "dist:client": {
       "command": "webpack --colors --config ./webpack/webpack.config.prod.client.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "dev:server": {
+      "command": "webpack --colors --config ./webpack/webpack.config.dev.server.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "dist:server": {
+      "command": "webpack --colors --config ./webpack/webpack.config.prod.server.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "dist": {
+      "command": "webpack --colors --config ./webpack/webpack.config.prod.js",
       "env": {
         "NODE_ENV": "production"
       }
@@ -94,6 +114,8 @@
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.5",
     "karma-webpack": "^1.7.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
     "math-expression-evaluator": "^1.2.14",
     "md5": "^2.2.1",
     "minimist": "^1.2.0",

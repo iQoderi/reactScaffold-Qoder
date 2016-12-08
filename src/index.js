@@ -3,7 +3,7 @@
  */
 'use strict';
 import 'core-js/fn/object/assign';
-import './styles/Main.scss';
+import './styles/Main.less';
 import React from 'react';
 import {render} from 'react-dom';
 

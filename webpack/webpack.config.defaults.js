@@ -8,6 +8,7 @@ let srcPath = path.join(__dirname, '/../src');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let deltPort = 9090;
 
+console.log(process.env.NODE_ENV)
 
 /**
  * default modules
@@ -25,7 +26,7 @@ let getDefaultModules = ()=> {
         loaders: [
             {
                 test: /\.css$/,
-                loader: process.env.NODE_ENV === 'dev' ? 'style-loader!css-loader!postcss-loader' : ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss-loader')
+                loader: process.env.NODE_ENV === 'development' ? 'style-loader!css-loader!postcss-loader' : ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss-loader')
             },
             {
                 test: /\.sass/,
@@ -33,11 +34,11 @@ let getDefaultModules = ()=> {
             },
             {
                 test: /\.scss$/,
-                loader: process.env.NODE_ENV === 'dev' ? 'style-loader!css-loader!sass-loader?outputStyle=expanded' : ExtractTextPlugin.extract('style', 'css!postcss!sass')
+                loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
             },
             {
                 test: /\.less/,
-                loader: 'style-loader!css-loader!less-loader'
+                loader: process.env.NODE_ENV === 'development' ?'style-loader!css-loader!less-loader':ExtractTextPlugin.extract('style-loader', 'css!postcss!less')
             },
             {
                 test: /\.styl/,
@@ -62,6 +63,6 @@ let getDefaultModules = ()=> {
 module.exports = {
     srcPath,
     publicPath: process.env.NODE_ENV == 'development' ? '/assets/' : 'http://odr4tn94d.bkt.clouddn.com/',
-    port:deltPort,
+    port: deltPort,
     getDefaultModules
 }

@@ -16,12 +16,14 @@ let config = Object.assign({}, baseConfig, {
         vendor: ['react', 'react-dom']
     },
     cache: false,
+    devtool:false,
+    debug:false,
     plugins: [
         new BowerWebpackPlugin({
             searchResolveModulesDirectories: false
         }),
         new webpack.DefinePlugin({
-            __DEVCLIENT__: true,
+            __DEVCLIENT__: false,
             __DEVSERVER__: false,
             __DEVTOOLS__: false,
             __DEVLOGGER__: false,
