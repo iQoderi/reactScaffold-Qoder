@@ -24,7 +24,7 @@ let config = Object.assign({}, baseConfig, {
             __DEVTOOLS__: false,
             __DEVLOGGER__: true,
             'process.env': {
-                'NODE_ENV': JSON.stringify('dev')
+                'NODE_ENV': JSON.stringify('development')
             }
         }),
         new webpack.HotModuleReplacementPlugin(),

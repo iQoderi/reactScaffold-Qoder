@@ -20,6 +20,15 @@ let config = Object.assign({}, baseConfig, {
         new BowerWebpackPlugin({
             searchResolveModulesDirectories: false
         }),
+        new webpack.DefinePlugin({
+            __DEVCLIENT__: true,
+            __DEVSERVER__: false,
+            __DEVTOOLS__: false,
+            __DEVLOGGER__: false,
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),
