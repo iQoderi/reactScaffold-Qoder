@@ -6,13 +6,21 @@
   "scripts": {
     "clean": "rimraf dist/*",
     "start": "better-npm-run dev",
-    "copy": "copyfiles -f ./src/index.html ./src/views/404.html ./src/favicon.ico ./dist/views"
+    "copy": "cp -f ./src/index.html  ./src/favicon.ico ./dist/",
+    "dist:client": "better-npm-run dist",
+    "prod:client": "npm run clean&&npm run copy&&npm run dist:client"
   },
   "betterScripts": {
     "dev": {
       "command": "node server.js",
       "env": {
         "NODE_ENV": "development"
+      }
+    },
+    "dist": {
+      "command": "webpack --colors --config ./webpack/webpack.config.prod.client.js",
+      "env": {
+        "NODE_ENV": "production"
       }
     }
   },
