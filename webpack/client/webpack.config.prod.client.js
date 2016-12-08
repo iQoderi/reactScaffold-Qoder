@@ -4,8 +4,8 @@
 'use strict';
 let path = require('path');
 let webpack = require('webpack');
-let baseConfig = require('./webpack.config.base');
-let defaultSettings = require('./webpack.config.defaults');
+let baseConfig = require('./../webpack.config.base.js');
+let defaultSettings = require('./../webpack.config.defaults.js');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 let autoprefixer = require('autoprefixer');

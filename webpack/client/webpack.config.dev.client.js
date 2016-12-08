@@ -4,8 +4,8 @@
 'use strict';
 let path = require('path');
 let webpack = require('webpack');
-let baseConfig = require('./webpack.config.base');
-let defaultSettings = require('./webpack.config.defaults');
+let baseConfig = require('./../webpack.config.base.js');
+let defaultSettings = require('./../webpack.config.defaults.js');
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 
 

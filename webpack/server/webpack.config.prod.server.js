@@ -1,34 +1,45 @@
 /**
- * Created by qoder on 16-12-8.
+ * Created by qoder on 16-10-19.
  */
 'use strict';
-var path = require('path');
-var webpack = require('webpack');
+
+var webpack = require("webpack");
+var path = require("path");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+
 module.exports = {
+    // The configuration for the server-side rendering
     name: "server-side rendering",
     context: path.join(__dirname),
     target: "node",
+    devTool:false,
     entry: {
-        server: ['babel-polyfill', './src/server.js']
+        server: ['babel-polyfill', path.join(__dirname,'../../src/server.js')]
     },
     output: {
         path: './dist',
         filename: "server.js",
-        publicPath: "/",
+        publicPath: "http://odr4tn94d.bkt.clouddn.com/",
         libraryTarget: "commonjs2"
     },
     plugins: [
-        new webpack.DefinePlugin({
-            __DEVCLIENT__: false,
-            __DEVSERVER__: true,
-            'process.env': {
-                'NODE_ENV': JSON.stringify('development')
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false
             }
         }),
         new ExtractTextPlugin('style.css'),
-        new webpack.IgnorePlugin(/vertx/)
+        new webpack.DefinePlugin({
+            __DEVCLIENT__: false,
+            __DEVSERVER__: false,
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.NoErrorsPlugin(),
+        new webpack.IgnorePlugin(/vertx/),
     ],
     module: {
         preLoaders: [
@@ -38,12 +49,8 @@ module.exports = {
             {
                 test: /\.js$|\.jsx$/,
                 loader: 'babel',
-                query: {
-                    "presets": ["es2015", "react", "stage-0"],
-                    "plugins": ["transform-decorators-legacy", "syntax-async-functions"]
-                },
-                include: path.join(__dirname, './src'),
-                exclude: /node_modules/
+                include: path.join(__dirname, '../../src'),
+                exclude: /node_modules/,
             },
             {
                 test: /\.css$/,
@@ -55,11 +62,11 @@ module.exports = {
             },
             {
                 test: /\.scss/,
-                loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded'
+                loader: ExtractTextPlugin.extract('style-loader', 'css!postcss!sass')
             },
             {
                 test: /\.less/,
-                loader: 'style-loader!css-loader!less-loader'
+                loader: ExtractTextPlugin.extract('style-loader', 'css!postcss!less')
             },
             {
                 test: /\.styl/,
@@ -67,21 +74,23 @@ module.exports = {
             },
             {test: /\.json$/, loader: "json-loader"},
             {
-                test: /\.(jpg|jpeg|png|gif)$/i,
+                test: /\.(jpe?g|png|gif)$/i,
                 loaders: [
-                    'url?limit=10000&name=images/[hash:8].[name].[ext]',
+                    'url?limit=10000&name=assets/[hash:8].[name].[ext]',
                     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ]
             }
         ]
     },
     eslint: {
-        configFile: path.join(__dirname, './.eslintrc.json')
+        configFile: path.join(__dirname, '../../.eslintrc.json')
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.css', 'scss'],
+        extensions: ['', '.js', '.jsx', '.css'],
         modulesDirectories: [
             "src", "node_modules"
         ]
     }
 };
+
+

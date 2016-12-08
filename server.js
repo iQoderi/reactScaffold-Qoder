@@ -5,7 +5,7 @@
 require('core-js/fn/object/assign');
 let webpack = require('webpack');
 let webpackDevServer = require('webpack-dev-server');
-let config = require('./webpack/webpack.config.dev.client');
+let config = require('./webpack/client/webpack.config.dev.client.js');
 let open = require('open');
 
 new webpackDevServer(webpack(config), config.devServer)
