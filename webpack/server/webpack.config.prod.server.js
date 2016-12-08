@@ -3,9 +3,10 @@
  */
 'use strict';
 
-var webpack = require("webpack");
-var path = require("path");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+let webpack = require("webpack");
+let path = require("path");
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let autoprefixer=require('autoprefixer');
 
 
 module.exports = {
@@ -13,12 +14,12 @@ module.exports = {
     name: "server-side rendering",
     context: path.join(__dirname),
     target: "node",
-    devTool:false,
+    // devTool:false,
     entry: {
         server: ['babel-polyfill', path.join(__dirname,'../../src/server.js')]
     },
     output: {
-        path: './dist',
+        path: '../../dist',
         filename: "server.js",
         publicPath: "http://odr4tn94d.bkt.clouddn.com/",
         libraryTarget: "commonjs2"
@@ -30,7 +31,7 @@ module.exports = {
                 warnings: false
             }
         }),
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('style.[hash].css'),
         new webpack.DefinePlugin({
             __DEVCLIENT__: false,
             __DEVSERVER__: false,
@@ -80,11 +81,9 @@ module.exports = {
                     'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
                 ]
             }
-        ]
+        ],
     },
-    eslint: {
-        configFile: path.join(__dirname, '../../.eslintrc.json')
-    },
+    postcss: [autoprefixer],
     resolve: {
         extensions: ['', '.js', '.jsx', '.css'],
         modulesDirectories: [

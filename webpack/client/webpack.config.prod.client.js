@@ -4,15 +4,15 @@
 'use strict';
 let path = require('path');
 let webpack = require('webpack');
-let baseConfig = require('./../webpack.config.base.js');
-let defaultSettings = require('./../webpack.config.defaults.js');
+let baseConfig = require('../webpack.config.base.js');
+let defaultSettings = require('../webpack.config.defaults.js');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let BowerWebpackPlugin = require('bower-webpack-plugin');
 let autoprefixer = require('autoprefixer');
 
 let config = Object.assign({}, baseConfig, {
     entry: {
-        buddle: path.join(__dirname, '../src/index'),
+        buddle: path.join(__dirname, '../../src/index'),
         vendor: ['react', 'react-dom']
     },
     cache: false,
@@ -48,7 +48,7 @@ config.module.loaders.push({
     loader: 'babel',
     include: [].concat(
         config.additionalPaths,
-        [path.join(__dirname, '/../src')]
+        [path.join(__dirname, '../../src')]
     )
 });
 
