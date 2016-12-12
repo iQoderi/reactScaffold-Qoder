@@ -4,11 +4,9 @@
 'use strict';
 
 let path = require('path');
-let srcPath = path.join(__dirname, '/../src');
+let srcPath = path.join(__dirname, '../src');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
-let deltPort = 9090;
-
-console.log(process.env.NODE_ENV)
+let deltPort = 9000;
 
 /**
  * default modules

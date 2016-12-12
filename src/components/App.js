@@ -8,7 +8,9 @@ import React,{Component} from 'react';
 class App extends Component{
     render(){
         return (
-            <div>test</div>
+            <div>
+                wqdrawfrewfrefrewf
+            </div>
         )
     }
 }

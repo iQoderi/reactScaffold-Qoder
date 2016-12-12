@@ -13,7 +13,7 @@ let config = Object.assign({}, baseConfig, {
     entry: [
         'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
         'webpack/hot/only-dev-server',
-        '../../src/index'
+        path.join(__dirname,'../../src/index')
     ],
     cache: true,
     devtool: 'eval-source-map',
@@ -41,7 +41,7 @@ config.module.loaders.push({
     loader: 'react-hot!babel-loader',
     include: [].concat(
         config.additionalPaths,
-        [path.join(__dirname, '../../src')]
+        [path.join(__dirname, '/../../src')]
     )
 })
 

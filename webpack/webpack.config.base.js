@@ -19,7 +19,7 @@ module.exports = {
         publicPath: defaultSettings.publicPath
     },
     devServer: {
-        contentBase: '../src/',
+        contentBase: './src',
         historyApiFallback: true,
         hot: true,
         port: defaultSettings.port,
@@ -37,5 +37,5 @@ module.exports = {
             config: `${defaultSettings.srcPath}/config/` + process.env.NODE_ENV
         }
     },
-    module:{}
+    module: {}
 }
