@@ -2,14 +2,13 @@
  * Created by qoder on 16-12-8.
  */
 'use strict';
-import React,{Component} from 'react';
+import * as React from 'react';
 
-
-class App extends Component{
+class App extends React.Component<{},{}>{
     render(){
         return (
             <div>
-                wqdrawfrewfrefrewf
+                dwadaddawdadawdad
             </div>
         )
     }
